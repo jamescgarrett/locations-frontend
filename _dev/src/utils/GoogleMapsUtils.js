@@ -130,9 +130,6 @@ var findResults = function (location, radius, locations) {
             nearBy.push(j);
         }
     }
-    nearBy.sort(function(a, b) { 
-        return a.distance - b.distance;
-    });
     return nearBy;
 };
 

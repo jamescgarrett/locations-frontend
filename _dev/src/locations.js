@@ -84,7 +84,8 @@ import GoogleMapsUtils from './utils/GoogleMapsUtils';
             self.locations = results.locations;
             self.settings = results.settings;
             self.geocoder = new google.maps.Geocoder();
-            if (results.settings.showMap) {
+            if (results.settings.showMap == '1') {
+                
                 GoogleMapsUtils.setupMap(self.geocoder, results.settings.defaultZip, self.mapContainer, function (result) {
                     self.map = result;
                     getInitialView.call(self);
@@ -176,11 +177,9 @@ import GoogleMapsUtils from './utils/GoogleMapsUtils';
             for (var i = 0; i < results.length; i++) {
                 self.filteredLocations.push(self.locations[results[i]]);
             }
-
             self.filteredLocations.sort(function (a, b) { 
                 return a.latitude - b.latitude ; 
             });
-
             updateView.call(self);
         });
     };
