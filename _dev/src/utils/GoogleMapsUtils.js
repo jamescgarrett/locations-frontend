@@ -4,7 +4,7 @@ var GoogleMapsUtils = {};
 
 GoogleMapsUtils.findCurrentLocation = function (geocoder, settings, locations, sendResults) {
 
-    if (!!navigator.geolocation && settings.useGeoLocation !== '0') {
+    if (!!navigator.geolocation && settings.useGeoLocation === '1') {
         navigator.geolocation.getCurrentPosition(function (position) {
             var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             sendResults(findResults(geolocate, parseInt(settings.defaultRadius, 10), locations));
@@ -83,7 +83,7 @@ GoogleMapsUtils.addMapMarkers = function (map, locations) {
         google.maps.event.addListener(marker, 'click', (function (marker, d, locations) {
             let address2 = locations[d].address2.length ? '<br>' + locations[d].address2 : '';
             return function() {
-                infoWindow.setContent('<div class="info_content"><h3>' + locations[d].name + '</h3><p>' + locations[d].address1 + '<br>' + address2 + locations[d].city + ',' + locations[d].state + locations[d].zipCode + '<br><a href="' + locations[d].websiteLink + '" target="_blank">' + locations[d].website + '</a></p>');
+                infoWindow.setContent('<div class="info_content"><h3>' + locations[d].name + '</h3><p>' + locations[d].address1 + '<br>' + address2 + locations[d].city + ',' + locations[d].state + locations[d].zipCode + '<br>' + locations[d].phone + '<br><a href="' + locations[d].website + '" target="_blank">' + locations[d].website + '</a></p>');
                 infoWindow.open(map, marker);
             }
         })(marker, d, locations));
